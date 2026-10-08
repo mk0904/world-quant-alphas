@@ -1,0 +1,41 @@
+# --- secrets ---
+.env
+!.env.example
+
+# --- python ---
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+.venv/
+venv/
+*.egg-info/
+build/
+dist/
+
+# --- ide ---
+.DS_Store
+.vscode/
+.idea/
+.qodo/
+
+# --- generated data ---
+data/
+*.db
+*.db-shm
+*.db-wal
+*.lock
+.pnl_cache/
+fields.csv
+fields.json
+survivors.csv
+basket.csv
+*.log
+
+# --- references (research-only, not project source) ---
+reference/
+
+# --- caches ---
+.pytest_cache/
+.ruff_cache/
+.mypy_cache/
