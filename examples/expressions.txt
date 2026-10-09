@@ -1,0 +1,30 @@
+# Expressions file format:
+#   bare expression on its own line, OR
+#   label :: expression
+# blank lines and # comments are skipped.
+# decay/truncation come from CLI flags; universes/neutralizations cross every line.
+
+# 1. Systematic Low-Beta Anomaly (model51)
+low_beta_anomaly          :: group_rank(-beta_last_60_days_spy, subindustry)
+
+# 2. Idiosyncratic Risk & Low Market Correlation (model51)
+idio_risk_asymmetry       :: group_rank(-systematic_risk_last_30_days, subindustry) * group_rank(-correlation_last_60_days_spy, subindustry)
+
+# 3. Options IV Term Structure Slope (30d vs 180d) (option8/9)
+opt_iv_term_structure     :: group_neutralize(-ts_zscore(implied_volatility_call_30 - implied_volatility_call_180, 20), subindustry)
+
+# 4. Options Skew 5-day Velocity (option8/9)
+opt_skew_velocity         :: group_neutralize(ts_delta(implied_volatility_call_60 - implied_volatility_put_60, 5), subindustry)
+
+# 5. Sloan Accrual & Cash Conversion Quality (fundamental6)
+accrual_cf_divergence     :: group_neutralize(rank(cashflow_op / (assets + 0.01)) - rank(operating_income / (assets + 0.01)), subindustry)
+
+# 6. Fundamental Style Pentagon: Quality x Growth (model16)
+fscore_quality_growth     :: group_rank(fscore_bfl_quality, subindustry) * group_rank(fscore_bfl_growth, subindustry)
+
+# 7. RavenPack News Sentiment Momentum (news18)
+news_sent_mom             :: rank(ts_decay_linear(vec_avg(composite_sentiment_score_2), 5))
+
+# 8. Earnings Evaluation News Sentiment Spread (news18)
+news_eval_spread          :: rank(ts_decay_linear(vec_avg(earnings_evaluation_sentiment), 10))
+# verified top alpha expressions
