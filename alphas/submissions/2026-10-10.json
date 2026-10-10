@@ -1,0 +1,15 @@
+[
+  {
+    "id": "0mr6vjjG",
+    "dateSubmitted": "2026-10-10T07:34:36-04:00",
+    "universe": "TOP1000",
+    "grade": "AVERAGE",
+    "sharpe": 1.58,
+    "fitness": 1.23,
+    "returns": 0.0758,
+    "turnover": 0.0819,
+    "margin": 0.00185,
+    "drawdown": 0.0504,
+    "expression": "/*\nHYPOTHESIS: If the stock price of a company has increased over the last 2 days, it may decrease in the future (time series delta of closing price today and closing price 2 days ago).\n\nIMPLEMENTATION: If company A's stock price had increased twice as much as the stock price of another company B, the prices of both stocks may decrease in the future.  In this reversion example, stock A may not fall double stock B, though it may fall more than stock B (rank operator).\n\nHINT: Can different neutralizations and decay settings improve this signal? Under what neutralization would a reversion idea work best?\n*/\n\ngroup_rank(ts_rank(operating_income / cap, 250), industry)"
+  }
+]
