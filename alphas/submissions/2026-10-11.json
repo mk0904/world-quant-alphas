@@ -1,0 +1,15 @@
+[
+  {
+    "id": "pw5exo3j",
+    "dateSubmitted": "2026-10-11T16:37:45-04:00",
+    "universe": "TOP1000",
+    "grade": "AVERAGE",
+    "sharpe": 2.05,
+    "fitness": 1.12,
+    "returns": 0.0856,
+    "turnover": 0.2851,
+    "margin": 0.0006,
+    "drawdown": 0.0369,
+    "expression": "trade_when(volume > adv20, group_rank(-((close - open) / (high - low)),subindustry), -1)"
+  }
+]
