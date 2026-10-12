@@ -24,5 +24,18 @@
     "margin": 0.0006,
     "drawdown": 0.0369,
     "expression": "trade_when(volume > adv20, group_rank(-((close - open) / (high - low)),subindustry), -1)"
+  },
+  {
+    "id": "1YZ8JKrW",
+    "dateSubmitted": "2026-10-12T06:44:14-04:00",
+    "universe": "TOP1000",
+    "grade": "AVERAGE",
+    "sharpe": 1.69,
+    "fitness": 1.36,
+    "returns": 0.0809,
+    "turnover": 0.1101,
+    "margin": 0.00147,
+    "drawdown": 0.0527,
+    "expression": "group_rank(ts_rank(est_eps / close, 252), subindustry)"
   }
 ]
