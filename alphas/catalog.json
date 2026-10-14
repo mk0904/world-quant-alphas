@@ -50,5 +50,31 @@
     "margin": 0.000942,
     "drawdown": 0.0496,
     "expression": "0.6 * group_rank(ts_rank(est_eps / close, 252), subindustry) + 0.4 * group_rank(ts_rank(cashflow_op / assets, 252), subindustry)"
+  },
+  {
+    "id": "GrgAOV7J",
+    "dateSubmitted": "2026-10-14T13:44:17-04:00",
+    "universe": "TOP500",
+    "grade": "AVERAGE",
+    "sharpe": 1.76,
+    "fitness": 1.02,
+    "returns": 0.1386,
+    "turnover": 0.4157,
+    "margin": 0.000667,
+    "drawdown": 0.0753,
+    "expression": "group_neutralize(rank(ts_mean(ts_decay_linear(-ts_rank(returns, 5), 12), 3)), industry)"
+  },
+  {
+    "id": "bl8ZR5YM",
+    "dateSubmitted": "2026-10-14T13:28:35-04:00",
+    "universe": "TOP500",
+    "grade": "INFERIOR",
+    "sharpe": 1.57,
+    "fitness": 1.0,
+    "returns": 0.098,
+    "turnover": 0.2424,
+    "margin": 0.000808,
+    "drawdown": 0.0567,
+    "expression": "group_neutralize(ts_decay_linear(-ts_rank(returns, 5), 15), industry)"
   }
 ]
