@@ -76,5 +76,44 @@
     "margin": 0.000808,
     "drawdown": 0.0567,
     "expression": "group_neutralize(ts_decay_linear(-ts_rank(returns, 5), 15), industry)"
+  },
+  {
+    "id": "WjLkV97G",
+    "dateSubmitted": "2026-10-15T20:09:49-04:00",
+    "universe": "TOP1000",
+    "grade": "AVERAGE",
+    "sharpe": 1.48,
+    "fitness": 1.16,
+    "returns": 0.1225,
+    "turnover": 0.1981,
+    "margin": 0.001236,
+    "drawdown": 0.1122,
+    "expression": "group_neutralize(rank(rank(ts_decay_linear(ts_backfill((implied_volatility_call_180 - implied_volatility_put_180) / implied_volatility_mean_180, 60), 4)) * rank(ts_decay_linear(-(close - open) / open, 2))), industry)"
+  },
+  {
+    "id": "zqramVjK",
+    "dateSubmitted": "2026-10-15T20:59:43-04:00",
+    "universe": "TOP1000",
+    "grade": "AVERAGE",
+    "sharpe": 1.72,
+    "fitness": 1.26,
+    "returns": 0.1174,
+    "turnover": 0.2189,
+    "margin": 0.001073,
+    "drawdown": 0.0952,
+    "expression": "group_neutralize(rank(rank(ts_decay_linear(ts_backfill((implied_volatility_call_60 - implied_volatility_put_60) / implied_volatility_mean_60, 20), 3)) * rank(ts_decay_linear(-(close - open) / open, 2))), subindustry)"
+  },
+  {
+    "id": "A1QdOKzX",
+    "dateSubmitted": "2026-10-15T10:09:44-04:00",
+    "universe": "TOP1000",
+    "grade": "AVERAGE",
+    "sharpe": 1.26,
+    "fitness": 1.35,
+    "returns": 0.1846,
+    "turnover": 0.1613,
+    "margin": 0.00229,
+    "drawdown": 0.2201,
+    "expression": "trade_when(pcr_oi_270 < 1, (implied_volatility_call_270 - implied_volatility_put_270), -1)"
   }
 ]
