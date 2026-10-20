@@ -1,7 +1,10 @@
-# Submitted Alphas Registry (9 Active in OS)
+# Submitted Alphas Registry (12 Active in OS)
 
 | Alpha ID | Submitted | Universe | Grade | Sharpe | Fitness | Returns | Margin | Turnover | Drawdown |
 | :--- | :---: | :---: | :---: | :---: | :---: | :---: | :---: | :---: | :---: |
+| `vROjA1na` | 2026-10-20 | `TOP3000` | AVERAGE | 2.47 | 1.25 | 15.04% | 0.000513 | 58.70% | 7.47% |
+| `xA1YZJbm` | 2026-10-20 | `TOP3000` | AVERAGE | 1.97 | 1.21 | 10.78% | 0.000749 | 28.80% | 3.54% |
+| `88vj9rXz` | 2026-10-20 | `TOP500` | INFERIOR | 1.61 | 1.0 | 13.16% | 0.000778 | 33.84% | 8.10% |
 | `A1QdOKzX` | 2026-10-15 | `TOP1000` | AVERAGE | 1.26 | 1.35 | 18.46% | 0.002290 | 16.13% | 22.01% |
 | `zqramVjK` | 2026-10-15 | `TOP1000` | AVERAGE | 1.72 | 1.26 | 11.74% | 0.001073 | 21.89% | 9.52% |
 | `WjLkV97G` | 2026-10-15 | `TOP1000` | AVERAGE | 1.48 | 1.16 | 12.25% | 0.001236 | 19.81% | 11.22% |

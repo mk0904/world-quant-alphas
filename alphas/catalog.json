@@ -115,5 +115,44 @@
     "margin": 0.00229,
     "drawdown": 0.2201,
     "expression": "trade_when(pcr_oi_270 < 1, (implied_volatility_call_270 - implied_volatility_put_270), -1)"
+  },
+  {
+    "id": "88vj9rXz",
+    "dateSubmitted": "2026-10-20T19:40:45-04:00",
+    "universe": "TOP500",
+    "grade": "INFERIOR",
+    "sharpe": 1.61,
+    "fitness": 1.0,
+    "returns": 0.1316,
+    "turnover": 0.3384,
+    "margin": 0.000778,
+    "drawdown": 0.081,
+    "expression": "rank(ts_decay_linear(-ts_delta(vwap, 1), 3)) * rank(volume / ts_mean(volume, 100))"
+  },
+  {
+    "id": "xA1YZJbm",
+    "dateSubmitted": "2026-10-20T17:40:00-04:00",
+    "universe": "TOP3000",
+    "grade": "AVERAGE",
+    "sharpe": 1.97,
+    "fitness": 1.21,
+    "returns": 0.1078,
+    "turnover": 0.288,
+    "margin": 0.000749,
+    "drawdown": 0.0354,
+    "expression": "fast = ts_decay_linear(group_neutralize(-ts_zscore(winsorize(returns, std=4), 10), subindustry), 10);\nslow = group_rank(ts_rank(operating_income / cap, 250), industry);\nalpha = rank(0.75 * rank(fast) + 0.25 * rank(slow));\ntrade_when(rank(adv20) > 0.3, alpha, -1)"
+  },
+  {
+    "id": "vROjA1na",
+    "dateSubmitted": "2026-10-20T08:20:29-04:00",
+    "universe": "TOP3000",
+    "grade": "AVERAGE",
+    "sharpe": 2.47,
+    "fitness": 1.25,
+    "returns": 0.1504,
+    "turnover": 0.587,
+    "margin": 0.000513,
+    "drawdown": 0.0747,
+    "expression": "rank(-ts_delta(close, 1)) * rank(volume / ts_mean(volume, 80))"
   }
 ]
