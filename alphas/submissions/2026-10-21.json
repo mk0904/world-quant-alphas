@@ -1,0 +1,93 @@
+[
+  {
+    "id": "akVKodYO",
+    "dateSubmitted": "2026-10-21T18:26:39-04:00",
+    "universe": "TOP3000",
+    "grade": "GOOD",
+    "sharpe": 2.26,
+    "fitness": 1.89,
+    "returns": 0.0885,
+    "turnover": 0.126,
+    "margin": 0.001406,
+    "drawdown": 0.04,
+    "expression": "clv = ((close - low) - (high - close)) / (high - low + 0.001); flow = clv * volume / (adv20 + 1); fast = group_neutralize(ts_decay_linear(-flow, 5), subindustry); slow = 0.5 * group_rank(ts_rank(est_eps / (close + 0.01), 252), subindustry) + 0.5 * group_rank(ts_rank(operating_income / (assets + 0.01), 252), subindustry); rank(0.40 * rank(fast) + 0.60 * rank(slow))"
+  },
+  {
+    "id": "kqJN1j1l",
+    "dateSubmitted": "2026-10-21T17:51:42-04:00",
+    "universe": "TOP3000",
+    "grade": "AVERAGE",
+    "sharpe": 1.75,
+    "fitness": 1.29,
+    "returns": 0.0678,
+    "turnover": 0.1232,
+    "margin": 0.0011,
+    "drawdown": 0.0452,
+    "expression": "fast = group_neutralize(ts_decay_linear(-(close - open) / (open * ts_std_dev(returns, 20) + 0.0001), 4), subindustry); slow = group_rank(ts_rank(operating_income / (assets + 0.01), 252), subindustry); rank(0.40 * rank(fast) + 0.60 * rank(slow))"
+  },
+  {
+    "id": "ZYmQW3Aj",
+    "dateSubmitted": "2026-10-21T17:30:40-04:00",
+    "universe": "TOP3000",
+    "grade": "AVERAGE",
+    "sharpe": 2.62,
+    "fitness": 1.34,
+    "returns": 0.1408,
+    "turnover": 0.5404,
+    "margin": 0.000521,
+    "drawdown": 0.0425,
+    "expression": "clv = ((close - low) - (high - close)) / (high - low + 0.001); flow = clv * volume / (adv20 + 1); fast = group_neutralize(-flow, subindustry); slow = group_rank(ts_rank(est_eps / (close + 0.01), 252), subindustry); rank(0.60 * rank(fast) + 0.40 * rank(slow))"
+  },
+  {
+    "id": "XgR9lPlx",
+    "dateSubmitted": "2026-10-21T17:18:44-04:00",
+    "universe": "TOP1000",
+    "grade": "AVERAGE",
+    "sharpe": 1.54,
+    "fitness": 1.01,
+    "returns": 0.0543,
+    "turnover": 0.0735,
+    "margin": 0.001477,
+    "drawdown": 0.0368,
+    "expression": "f1 = group_rank(ts_rank(cashflow_op / (cap + 0.01), 252), subindustry); f2 = group_rank(ts_rank(sales / (assets + 0.01), 252), subindustry); f3 = group_rank(ts_rank(operating_income / (sales + 0.01), 252), subindustry); rank(0.40 * f1 + 0.35 * f2 + 0.25 * f3)"
+  },
+  {
+    "id": "E5V6omk9",
+    "dateSubmitted": "2026-10-21T16:30:43-04:00",
+    "universe": "TOP3000",
+    "grade": "AVERAGE",
+    "sharpe": 2.38,
+    "fitness": 1.27,
+    "returns": 0.1524,
+    "turnover": 0.5339,
+    "margin": 0.000571,
+    "drawdown": 0.0525,
+    "expression": "fast = group_neutralize(-(close - open) / (open * ts_std_dev(returns, 20)), subindustry); slow = group_rank(ts_rank(est_eps / (close + 0.01), 252), subindustry); rank(0.65 * rank(fast) + 0.35 * rank(slow))"
+  },
+  {
+    "id": "npAAQ0Yd",
+    "dateSubmitted": "2026-10-21T13:07:31-04:00",
+    "universe": "TOP1000",
+    "grade": "AVERAGE",
+    "sharpe": 1.81,
+    "fitness": 1.28,
+    "returns": 0.0624,
+    "turnover": 0.0635,
+    "margin": 0.001967,
+    "drawdown": 0.0228,
+    "expression": "quality = group_rank(ts_rank(est_ebitda / (est_sales + 0.01), 252), subindustry); value = group_rank(ts_rank(est_ebitda / (cap + 0.01), 252), subindustry); rank(0.55 * quality + 0.45 * value)"
+  },
+  {
+    "id": "0mjjO7k6",
+    "dateSubmitted": "2026-10-21T08:22:01-04:00",
+    "universe": "TOP3000",
+    "grade": "AVERAGE",
+    "sharpe": 1.92,
+    "fitness": 1.1,
+    "returns": 0.1321,
+    "turnover": 0.4053,
+    "margin": 0.000652,
+    "drawdown": 0.044,
+    "expression": "fast = group_neutralize(-ts_delta(close, 2) / (ts_std_dev(returns, 20) * close), subindustry); slow = group_rank(ts_rank(cashflow_op / assets, 252), subindustry); rank(0.65 * rank(fast) + 0.35 * rank(slow))"
+  }
+]
