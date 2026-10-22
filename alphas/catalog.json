@@ -245,5 +245,44 @@
     "margin": 0.000652,
     "drawdown": 0.044,
     "expression": "fast = group_neutralize(-ts_delta(close, 2) / (ts_std_dev(returns, 20) * close), subindustry); slow = group_rank(ts_rank(cashflow_op / assets, 252), subindustry); rank(0.65 * rank(fast) + 0.35 * rank(slow))"
+  },
+  {
+    "id": "QPYO6Erw",
+    "dateSubmitted": "2026-10-22T22:30:49-04:00",
+    "universe": "TOP1000",
+    "grade": "GOOD",
+    "sharpe": 2.13,
+    "fitness": 1.72,
+    "returns": 0.0819,
+    "turnover": 0.1026,
+    "margin": 0.001596,
+    "drawdown": 0.0276,
+    "expression": "rev5 = -ts_rank(returns, 5); fast = group_neutralize(ts_decay_linear(rev5, 10), subindustry); quality = group_rank(ts_rank(est_ebitda / (est_sales + 0.01), 252), subindustry); value = group_rank(ts_rank(est_ebitda / (cap + 0.01), 252), subindustry); slow = 0.50 * quality + 0.50 * value; rank(0.28 * rank(fast) + 0.72 * rank(slow))"
+  },
+  {
+    "id": "1YjOdG6K",
+    "dateSubmitted": "2026-10-22T14:42:51-04:00",
+    "universe": "TOP1000",
+    "grade": "AVERAGE",
+    "sharpe": 1.77,
+    "fitness": 1.31,
+    "returns": 0.0685,
+    "turnover": 0.1246,
+    "margin": 0.001099,
+    "drawdown": 0.0291,
+    "expression": "clv = ((close - low) - (high - close)) / (high - low + 0.001); flow = clv * volume / (adv20 + 1); vwap_dev = (close - vwap) / (close * ts_std_dev(returns, 20) + 0.0001); fast = group_neutralize(ts_decay_linear(-0.5 * flow - 0.5 * vwap_dev, 7), subindustry); slow = 0.40 * group_rank(ts_rank(operating_income / (assets + 0.01), 252), subindustry) + 0.40 * group_rank(ts_rank(cashflow_op / (assets + 0.01), 252), subindustry) + 0.20 * group_rank(ts_rank(est_ebitda / (est_sales + 0.01), 252), subindustry); rank(0.34 * rank(fast) + 0.66 * rank(slow))"
+  },
+  {
+    "id": "58jr8VJJ",
+    "dateSubmitted": "2026-10-22T11:32:21-04:00",
+    "universe": "TOP1000",
+    "grade": "AVERAGE",
+    "sharpe": 2.0,
+    "fitness": 1.32,
+    "returns": 0.0943,
+    "turnover": 0.2153,
+    "margin": 0.000876,
+    "drawdown": 0.0692,
+    "expression": "fast = group_neutralize(ts_decay_linear(-(close - vwap) / (close * ts_std_dev(returns, 20) + 0.0001), 5), subindustry); slow = 0.50 * group_rank(ts_rank(operating_income / (assets + 0.01), 252), subindustry) + 0.50 * group_rank(ts_rank(cashflow_op / (cap + 0.01), 252), subindustry); rank(0.40 * rank(fast) + 0.60 * rank(slow))"
   }
 ]
