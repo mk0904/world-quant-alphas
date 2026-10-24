@@ -414,5 +414,83 @@
     "margin": 0.001493,
     "drawdown": 0.0424,
     "expression": "eps_rev = (est_eps - ts_delay(est_eps, 63)) / (close + 0.01); fast = group_neutralize(ts_decay_linear(eps_rev, 10), subindustry); quality = group_rank(ts_rank(operating_income / (assets + 0.01), 252), subindustry); value = group_rank(ts_rank(est_ebitda / (cap + 0.01), 252), subindustry); slow = 0.55 * quality + 0.45 * value; rank(0.40 * rank(fast) + 0.60 * rank(slow))"
+  },
+  {
+    "id": "YPxo8AKq",
+    "dateSubmitted": "2026-10-24T21:30:52-04:00",
+    "universe": "TOP3000",
+    "grade": "AVERAGE",
+    "sharpe": 1.77,
+    "fitness": 1.12,
+    "returns": 0.0605,
+    "turnover": 0.15,
+    "margin": 0.000807,
+    "drawdown": 0.0331,
+    "expression": "gap = -(open - ts_delay(close, 1)) / (ts_delay(close, 1) + 0.001) * ts_rank(volume / (adv20 + 1), 20);\nrev = -0.45 * ts_rank(returns, 2) - 0.35 * ts_rank(returns, 3) - 0.20 * ts_rank(returns, 5);\nintra = -(close - open) / (high - low + 0.001);\nfast = group_neutralize(ts_decay_linear(0.45 * gap + 0.35 * rev + 0.20 * intra, 8), subindustry);\nf1 = group_rank(ts_rank(operating_income / (assets + 0.01), 252), subindustry);\nf2 = group_rank(ts_rank((est_sales - ts_delay(est_sales, 63)) / (cap + 0.01), 252), subindustry);\nf3 = group_rank(ts_rank((cashflow_op - capex) / (cap + 0.01), 252), subindustry);\nslow = 0.15 * f1 + 0.55 * f2 + 0.30 * f3;\nrank(0.38 * rank(fast) + 0.62 * rank(slow))"
+  },
+  {
+    "id": "VkdbGa1M",
+    "dateSubmitted": "2026-10-24T18:38:21-04:00",
+    "universe": "TOP2000",
+    "grade": "AVERAGE",
+    "sharpe": 1.82,
+    "fitness": 1.26,
+    "returns": 0.0689,
+    "turnover": 0.1438,
+    "margin": 0.000958,
+    "drawdown": 0.0424,
+    "expression": "f1 = group_rank(ts_rank(operating_income / (equity + debt + 0.01), 252), subindustry);\nf2 = group_rank(ts_rank((est_sales - ts_delay(est_sales, 63)) / (cap + 0.01), 252), subindustry);\nf3 = group_rank(ts_rank((cashflow_op - capex) / (cap + 0.01), 252), subindustry);\ngap = -(open - ts_delay(close, 1)) / (ts_delay(close, 1) + 0.001) * ts_rank(volume / (adv20 + 1), 20);\nrev = -0.45 * ts_rank(returns, 2) - 0.35 * ts_rank(returns, 3) - 0.20 * ts_rank(returns, 5);\nfast = group_neutralize(ts_decay_linear(0.55 * gap + 0.45 * rev, 8), subindustry);\nslow = 0.40 * f1 + 0.35 * f2 + 0.25 * f3;\nrank(0.35 * rank(fast) + 0.65 * rank(slow))"
+  },
+  {
+    "id": "LL5Y1Ngn",
+    "dateSubmitted": "2026-10-24T17:52:32-04:00",
+    "universe": "TOP1000",
+    "grade": "AVERAGE",
+    "sharpe": 1.67,
+    "fitness": 1.26,
+    "returns": 0.0779,
+    "turnover": 0.1368,
+    "margin": 0.001139,
+    "drawdown": 0.0454,
+    "expression": "gap = -(open - ts_delay(close, 1)) / (ts_delay(close, 1) + 0.001) * ts_rank(volume / (adv20 + 1), 20); rev = -0.40 * ts_rank(returns, 2) - 0.35 * ts_rank(returns, 3) - 0.25 * ts_rank(returns, 5); intra = -(close - open) / (high - low + 0.001); fast = group_neutralize(ts_decay_linear(0.45 * gap + 0.35 * rev + 0.20 * intra, 8), subindustry); f1 = group_rank(ts_rank((sales - cogs) / (assets + 0.01), 252), subindustry); f2 = group_rank(ts_rank(equity / (cap + 0.01), 252), subindustry); f3 = group_rank(ts_rank((est_ebitda - ts_delay(est_ebitda, 63)) / (cap + 0.01), 252), subindustry); slow = 0.40 * f1 + 0.35 * f2 + 0.25 * f3; rank(0.31 * rank(fast) + 0.69 * rank(slow))"
+  },
+  {
+    "id": "0mj2lGZ2",
+    "dateSubmitted": "2026-10-24T15:09:28-04:00",
+    "universe": "TOP2000",
+    "grade": "AVERAGE",
+    "sharpe": 1.86,
+    "fitness": 1.29,
+    "returns": 0.0603,
+    "turnover": 0.1256,
+    "margin": 0.000961,
+    "drawdown": 0.0263,
+    "expression": "flow = -((close - low) - (high - close)) / (high - low + 0.001) * volume / (adv20 + 1); wick = -((high - max(open, close)) - (min(open, close) - low)) / (high - low + 0.001); rev = -0.6 * ts_rank(returns, 3) - 0.4 * ts_rank(returns, 5); fast = group_neutralize(ts_decay_linear(0.40 * flow + 0.35 * wick + 0.25 * rev, 8), subindustry); f1 = group_rank(ts_rank(operating_income / (assets + 0.01), 252), subindustry); f2 = group_rank(ts_rank((est_ebitda - ts_delay(est_ebitda, 63)) / (cap + 0.01), 252), subindustry); f3 = group_rank(ts_rank(cashflow_op / (cap + 0.01), 252), subindustry); f4 = group_rank(ts_rank(est_ebitda / (est_sales + 0.01), 252), subindustry); slow = 0.10 * f1 + 0.45 * f2 + 0.25 * f3 + 0.20 * f4; rank(0.31 * rank(fast) + 0.69 * rank(slow))"
+  },
+  {
+    "id": "Vkdb1R5V",
+    "dateSubmitted": "2026-10-24T14:11:44-04:00",
+    "universe": "TOP1000",
+    "grade": "AVERAGE",
+    "sharpe": 1.64,
+    "fitness": 1.12,
+    "returns": 0.0593,
+    "turnover": 0.128,
+    "margin": 0.000927,
+    "drawdown": 0.0342,
+    "expression": "flow = -((close - low) - (high - close)) / (high - low + 0.001) * volume / (adv20 + 1); curv = -(close - 2 * ts_mean(close, 5) + ts_mean(close, 20)) / (ts_std_dev(close, 20) + 0.0001); rev = -0.6 * ts_rank(returns, 3) - 0.4 * ts_rank(returns, 5); fast = group_neutralize(ts_decay_linear(0.40 * flow + 0.35 * curv + 0.25 * rev, 8), subindustry); f1 = group_rank(ts_rank(operating_income / (assets + 0.01), 252), subindustry); f2 = group_rank(ts_rank((est_ebitda - ts_delay(est_ebitda, 63)) / (cap + 0.01), 252), subindustry); f3 = group_rank(ts_rank(cashflow_op / (cap + 0.01), 252), subindustry); f4 = group_rank(ts_rank(est_ebitda / (est_sales + 0.01), 252), subindustry); slow = 0.10 * f1 + 0.50 * f2 + 0.25 * f3 + 0.15 * f4; rank(0.31 * rank(fast) + 0.69 * rank(slow))"
+  },
+  {
+    "id": "A1Q5QnOR",
+    "dateSubmitted": "2026-10-24T11:20:46-04:00",
+    "universe": "TOP1000",
+    "grade": "GOOD",
+    "sharpe": 2.18,
+    "fitness": 1.67,
+    "returns": 0.0864,
+    "turnover": 0.1477,
+    "margin": 0.00117,
+    "drawdown": 0.0262,
+    "expression": "gap = -(open - ts_delay(close, 1)) / (ts_delay(close, 1) + 0.001) * ts_rank(volume / (adv20 + 1), 20); rev = -0.45 * ts_rank(returns, 2) - 0.35 * ts_rank(returns, 3) - 0.20 * ts_rank(returns, 5); intra = -(close - open) / (high - low + 0.001); fast = group_neutralize(ts_decay_linear(0.45 * gap + 0.35 * rev + 0.20 * intra, 9), subindustry); f1 = group_rank(ts_rank(operating_income / (assets + 0.01), 252), subindustry); f2 = group_rank(ts_rank((est_eps - ts_delay(est_eps, 63)) / (close + 0.01), 252), subindustry); f3 = group_rank(ts_rank(cashflow_op / (cap + 0.01), 252), subindustry); slow = 0.20 * f1 + 0.50 * f2 + 0.30 * f3; rank(0.38 * rank(fast) + 0.62 * rank(slow))"
   }
 ]
