@@ -583,5 +583,57 @@
     "margin": 0.001123,
     "drawdown": 0.0424,
     "expression": "gap = -(open - ts_delay(close, 1)) / (ts_delay(close, 1) + 0.001) * ts_rank(volume / (adv20 + 1), 20);\nrev = -0.60 * ts_rank(returns, 3) - 0.40 * ts_rank(returns, 5);\nfast = group_neutralize(ts_decay_linear(0.55 * gap + 0.45 * rev, 8), subindustry);\nq1 = group_rank(ts_rank(operating_income / (assets + 0.01), 252), subindustry);\nq2 = group_rank(ts_rank(est_ebitda / (est_sales + 0.01), 252), subindustry);\nq3 = group_rank(ts_rank(cashflow_op / (cap + 0.01), 252), subindustry);\nq4 = group_rank(ts_rank((sales - cogs) / (assets + 0.01), 252), subindustry);\nslow = 0.25 * q1 + 0.35 * q2 + 0.25 * q3 + 0.15 * q4;\nrank(0.32 * rank(fast) + 0.68 * rank(slow))"
+  },
+  {
+    "id": "KPJ0pq81",
+    "dateSubmitted": "2026-10-27T18:07:57-04:00",
+    "universe": "TOP1000",
+    "grade": "GOOD",
+    "sharpe": 2.21,
+    "fitness": 1.59,
+    "returns": 0.0853,
+    "turnover": 0.1638,
+    "margin": 0.001041,
+    "drawdown": 0.0305,
+    "expression": "sent = snt_social_value;\nsoc_sig = group_rank(ts_decay_linear(sent, 3), subindustry);\n\nintra = -(close - open) / (high - low + 0.001) * ts_rank(volume / (adv20 + 1), 20);\nrev = -ts_rank(returns, 3);\nfast = group_neutralize(ts_decay_linear(0.55 * intra + 0.45 * rev, 6), subindustry);\n\nfcf = cashflow_op - capex;\nfcf_yield = group_rank(ts_rank(fcf / (cap + 0.01), 252), subindustry);\nfcf_roa = group_rank(ts_rank(fcf / (assets + 0.01), 252), subindustry);\nebitda_assets = group_rank(ts_rank(ebitda / (assets + 0.01), 252), subindustry);\n\nslow = 0.40 * fcf_yield + 0.35 * fcf_roa + 0.25 * ebitda_assets;\n\nrank(0.33 * rank(fast) + 0.18 * rank(soc_sig) + 0.49 * rank(slow))"
+  },
+  {
+    "id": "xAr6bJVW",
+    "dateSubmitted": "2026-10-27T15:52:17-04:00",
+    "universe": "TOP2000",
+    "grade": "AVERAGE",
+    "sharpe": 1.97,
+    "fitness": 1.4,
+    "returns": 0.0762,
+    "turnover": 0.1505,
+    "margin": 0.001013,
+    "drawdown": 0.0495,
+    "expression": "intra = -(close - open) / (high - low + 0.001) * ts_rank(volume / (adv20 + 1), 20);\nrev = -0.55 * ts_rank(returns, 3) - 0.45 * ts_rank(returns, 5);\nfast = group_neutralize(ts_decay_linear(0.50 * intra + 0.50 * rev, 7), subindustry);\n\ncroic = group_rank(ts_rank(cashflow_op / (equity + debt + 0.01), 252), subindustry);\nfcf_yield = group_rank(ts_rank((cashflow_op - capex) / (cap + 0.01), 252), subindustry);\nop_margin = group_rank(ts_rank(operating_income / (sales + 0.01), 252), subindustry);\nslow = 0.40 * croic + 0.35 * fcf_yield + 0.25 * op_margin;\n\nrank(0.35 * rank(fast) + 0.65 * rank(slow))"
+  },
+  {
+    "id": "1YN97NvM",
+    "dateSubmitted": "2026-10-27T14:35:00-04:00",
+    "universe": "TOP3000",
+    "grade": "AVERAGE",
+    "sharpe": 1.65,
+    "fitness": 1.08,
+    "returns": 0.0539,
+    "turnover": 0.0927,
+    "margin": 0.001163,
+    "drawdown": 0.0347,
+    "expression": "cond = (volume > 1.15 * adv20) * ((high - low) > ts_mean(high - low, 20));\nclimax = -((close - open) / (high - low + 0.001)) * (volume / (adv20 + 1));\nfast = group_neutralize(ts_decay_linear(climax, 5), subindustry);\nfcf_yield = group_rank(ts_rank((cashflow_op - capex) / (cap + 0.01), 252), subindustry);\ncf_roa = group_rank(ts_rank(cashflow_op / (assets + 0.01), 252), subindustry);\ngp = group_rank(ts_rank((sales - cogs) / (assets + 0.01), 252), subindustry);\ncapex_disc = group_rank(-ts_rank(capex / (assets + 0.01), 252), subindustry);\nslow = 0.35 * fcf_yield + 0.25 * cf_roa + 0.25 * gp + 0.15 * capex_disc;\nalpha = rank(0.35 * rank(fast) + 0.65 * rank(slow));\ntrade_when(cond, alpha, -1)"
+  },
+  {
+    "id": "QPvM52X5",
+    "dateSubmitted": "2026-10-27T06:28:30-04:00",
+    "universe": "TOP1000",
+    "grade": "AVERAGE",
+    "sharpe": 1.56,
+    "fitness": 1.07,
+    "returns": 0.0583,
+    "turnover": 0.1012,
+    "margin": 0.001153,
+    "drawdown": 0.0364,
+    "expression": "cond = (volume > 1.15 * adv20) * ((high - low) > ts_mean(high - low, 20));\nclimax = -((close - open) / (high - low + 0.001)) * (volume / (adv20 + 1));\nfast = group_neutralize(ts_decay_linear(climax, 5), subindustry);\nq1 = group_rank(ts_rank(operating_income / (assets + 0.01), 252), subindustry);\nq2 = group_rank(ts_rank((cashflow_op - capex) / (cap + 0.01), 252), subindustry);\nslow = 0.55 * q1 + 0.45 * q2;\nalpha = rank(0.35 * rank(fast) + 0.65 * rank(slow));\ntrade_when(cond, alpha, -1)"
   }
 ]
