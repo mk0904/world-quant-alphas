@@ -1,0 +1,54 @@
+[
+  {
+    "id": "pwd6Qk5g",
+    "dateSubmitted": "2026-11-01T22:23:32-05:00",
+    "universe": "TOP2000",
+    "grade": "EXCELLENT",
+    "sharpe": 2.36,
+    "fitness": 2.01,
+    "returns": 0.1051,
+    "turnover": 0.1447,
+    "margin": 0.001453,
+    "drawdown": 0.0493,
+    "expression": "gap = -(open - ts_delay(close, 1)) / (close + 0.001) * ts_rank(volume / (adv20 + 1), 20);\nrev = -0.55 * ts_rank(returns, 3) - 0.45 * ts_rank(returns, 5);\nfast = group_neutralize(ts_decay_linear(0.50 * gap + 0.50 * rev, 8), subindustry);\n\nf1 = group_rank(ts_rank(est_eps / (close + 0.01), 252), subindustry);\nf2 = group_rank(ts_rank((sales - cogs) / (assets + 0.01), 252), subindustry);\nf3 = group_rank(ts_rank((cashflow_op - capex) / (cap + 0.01), 252), subindustry);\nf4 = group_rank(ts_rank(est_ebitda / (cap + 0.01), 252), subindustry);\nslow = 0.35 * f1 + 0.25 * f2 + 0.25 * f3 + 0.15 * f4;\n\nrank(0.35 * rank(fast) + 0.65 * rank(slow))"
+  },
+  {
+    "id": "KPJbxqX8",
+    "dateSubmitted": "2026-11-01T22:34:28-05:00",
+    "universe": "TOP1000",
+    "grade": "AVERAGE",
+    "sharpe": 1.8,
+    "fitness": 1.2,
+    "returns": 0.0658,
+    "turnover": 0.148,
+    "margin": 0.000889,
+    "drawdown": 0.041,
+    "expression": "gap = -(open - ts_delay(close, 1)) / (close + 0.001) * ts_rank(volume / (adv20 + 1), 20);\nrev = -0.55 * ts_rank(returns, 3) - 0.45 * ts_rank(returns, 5);\nfast = group_neutralize(ts_decay_linear(0.50 * gap + 0.50 * rev, 8), subindustry);\n\nf1 = group_rank(ts_rank((est_sales - ts_delay(est_sales, 63)) / (cap + 0.01), 252), subindustry);\nf2 = group_rank(ts_rank((cashflow_op - capex) / (cap + 0.01), 252), subindustry);\nf3 = group_rank(ts_rank((sales - cogs) / (assets + 0.01), 252), subindustry);\nslow = 0.40 * f1 + 0.35 * f2 + 0.25 * f3;\n\nrank(0.35 * rank(fast) + 0.65 * rank(slow))"
+  },
+  {
+    "id": "MPYbe8p6",
+    "dateSubmitted": "2026-11-01T01:52:06-05:00",
+    "universe": "TOP3000",
+    "grade": "GOOD",
+    "sharpe": 2.4,
+    "fitness": 1.78,
+    "returns": 0.09,
+    "turnover": 0.1637,
+    "margin": 0.0011,
+    "drawdown": 0.0358,
+    "expression": "sent = ts_backfill(snt_social_value, 5);\nsoc_sig = group_rank(ts_decay_linear(sent, 5), subindustry);\n\ngap = -(open - ts_delay(close, 1)) / (close + 0.001) * ts_rank(volume / (adv20 + 1), 20);\nrev = -0.55 * ts_rank(returns, 3) - 0.45 * ts_rank(returns, 5);\nfast = group_neutralize(ts_decay_linear(0.50 * gap + 0.50 * rev, 8), subindustry);\n\nfcf = cashflow_op - capex;\nfcf_yield = group_rank(ts_rank(fcf / (cap + 0.01), 252), subindustry);\ngp = group_rank(ts_rank((sales - cogs) / (assets + 0.01), 252), subindustry);\nebitda_assets = group_rank(ts_rank(ebitda / (assets + 0.01), 252), subindustry);\nslow = 0.40 * fcf_yield + 0.35 * gp + 0.25 * ebitda_assets;\n\nrank(0.32 * rank(fast) + 0.20 * rank(soc_sig) + 0.48 * rank(slow))"
+  },
+  {
+    "id": "N1NnPQgp",
+    "dateSubmitted": "2026-11-01T22:24:19-05:00",
+    "universe": "TOP500",
+    "grade": "AVERAGE",
+    "sharpe": 2.11,
+    "fitness": 1.45,
+    "returns": 0.0864,
+    "turnover": 0.184,
+    "margin": 0.000939,
+    "drawdown": 0.0439,
+    "expression": "gap = -(open - ts_delay(close, 1)) / (close + 0.001) * ts_rank(volume / (adv20 + 1), 20);\nrev = -0.50 * ts_rank(returns, 2) - 0.35 * ts_rank(returns, 3) - 0.15 * ts_rank(returns, 5);\nintra = -(close - open) / (high - low + 0.001);\nfast = group_neutralize(ts_decay_linear(0.40 * gap + 0.40 * rev + 0.20 * intra, 6), subindustry);\n\nf1 = group_rank(ts_rank((est_eps - ts_delay(est_eps, 63)) / (close + 0.01), 252), subindustry);\nf2 = group_rank(ts_rank((cashflow_op - capex) / (cap + 0.01), 252), subindustry);\nf3 = group_rank(ts_rank(est_ebitda / (est_sales + 0.01), 252), subindustry);\nf4 = group_rank(ts_rank(operating_income / (equity + 0.01), 252), subindustry);\nslow = 0.30 * f1 + 0.30 * f2 + 0.25 * f3 + 0.15 * f4;\n\nrank(0.35 * rank(fast) + 0.65 * rank(slow))"
+  }
+]
