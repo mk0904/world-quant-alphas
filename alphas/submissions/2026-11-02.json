@@ -1,0 +1,41 @@
+[
+  {
+    "id": "gJeMOWrJ",
+    "dateSubmitted": "2026-11-02T04:35:04-05:00",
+    "universe": "TOP2000",
+    "grade": "AVERAGE",
+    "sharpe": 2.13,
+    "fitness": 1.35,
+    "returns": 0.0683,
+    "turnover": 0.1711,
+    "margin": 0.000799,
+    "drawdown": 0.0357,
+    "expression": "sent = ts_backfill(snt_social_value, 5);\nsoc_sig = group_rank(ts_decay_linear(sent, 5), subindustry);\n\nrev = -0.40 * ts_rank(returns, 2) - 0.35 * ts_rank(returns, 3) - 0.25 * ts_rank(returns, 5);\nvol_shock = -ts_rank(volume / (adv20 + 1), 20) * sign(returns);\nfast = group_neutralize(ts_decay_linear(0.55 * rev + 0.45 * vol_shock, 8), subindustry);\n\nf1 = group_rank(ts_rank((est_ebitda - ts_delay(est_ebitda, 63)) / (cap + 0.01), 252), subindustry);\nf2 = group_rank(ts_rank((sales - cogs) / (sales + 0.01), 252), subindustry);\nf3 = group_rank(ts_rank((cashflow_op - capex) / (cap + 0.01), 252), subindustry);\nf4 = group_rank(ts_rank(operating_income / (sales + 0.01), 252), subindustry);\nslow = 0.30 * f1 + 0.25 * f2 + 0.25 * f3 + 0.20 * f4;\n\nrank(0.26 * rank(fast) + 0.32 * rank(soc_sig) + 0.42 * rank(slow))"
+  },
+  {
+    "id": "MPYpvN0M",
+    "dateSubmitted": "2026-11-02T03:24:51-05:00",
+    "universe": "TOP500",
+    "grade": "GOOD",
+    "sharpe": 2.21,
+    "fitness": 1.7,
+    "returns": 0.0964,
+    "turnover": 0.1628,
+    "margin": 0.001184,
+    "drawdown": 0.0406,
+    "expression": "sent = ts_backfill(snt_social_value, 5);\nsoc_sig = group_rank(ts_decay_linear(sent, 5), subindustry);\n\ngap = -(open - ts_delay(close, 1)) / (close + 0.001) * ts_rank(volume / (adv20 + 1), 20);\nrev = -0.55 * ts_rank(returns, 3) - 0.45 * ts_rank(returns, 5);\nfast = group_neutralize(ts_decay_linear(0.50 * gap + 0.50 * rev, 8), subindustry);\n\nf1 = group_rank(ts_rank((est_eps - ts_delay(est_eps, 63)) / (close + 0.01), 252), subindustry);\nf2 = group_rank(ts_rank((sales - cogs) / (assets + 0.01), 252), subindustry);\nf3 = group_rank(ts_rank((cashflow_op - capex) / (cap + 0.01), 252), subindustry);\nf4 = group_rank(ts_rank(est_ebitda / (est_sales + 0.01), 252), subindustry);\nslow = 0.30 * f1 + 0.25 * f2 + 0.25 * f3 + 0.20 * f4;\n\nrank(0.30 * rank(fast) + 0.18 * rank(soc_sig) + 0.52 * rank(slow))"
+  },
+  {
+    "id": "rKRb9rO1",
+    "dateSubmitted": "2026-11-02T04:38:05-05:00",
+    "universe": "TOP500",
+    "grade": "AVERAGE",
+    "sharpe": 1.83,
+    "fitness": 1.31,
+    "returns": 0.0828,
+    "turnover": 0.1609,
+    "margin": 0.00103,
+    "drawdown": 0.0468,
+    "expression": "gap = -(open - ts_delay(close, 1)) / (ts_delay(close, 1) + 0.001) * ts_rank(volume / (adv20 + 1), 20);\nrev = -0.45 * ts_rank(returns, 2) - 0.35 * ts_rank(returns, 3) - 0.20 * ts_rank(returns, 5);\nintra = -(close - open) / (high - low + 0.001);\nfast = group_neutralize(ts_decay_linear(0.45 * gap + 0.35 * rev + 0.20 * intra, 8), subindustry);\nf1 = group_rank(ts_rank(operating_income / (assets + 0.01), 252), subindustry);\nf2 = group_rank(ts_rank((est_ebitda - ts_delay(est_ebitda, 63)) / (cap + 0.01), 252), subindustry);\nf3 = group_rank(ts_rank(cashflow_op / (cap + 0.01), 252), subindustry);\nslow = 0.20 * f1 + 0.50 * f2 + 0.30 * f3;\nrank(0.38 * rank(fast) + 0.62 * rank(slow))"
+  }
+]
